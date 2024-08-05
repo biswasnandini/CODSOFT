@@ -1,8 +1,0 @@
-package com.example.alarmclock
-
-data class Alarm(
-    val id: Int,
-    val time: String,
-    val tone: String,
-    var isEnabled: Boolean
-)
