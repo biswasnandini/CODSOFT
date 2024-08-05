@@ -1,0 +1,42 @@
+package com.example.alarmclock
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.*
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var currentTimeTextView: TextView
+    private lateinit var setAlarmButton: Button
+    private lateinit var alarmsRecyclerView: RecyclerView
+    private val alarms = mutableListOf<Alarm>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        currentTimeTextView = findViewById(R.id.currentTimeTextView)
+        setAlarmButton = findViewById(R.id.setAlarmButton)
+        alarmsRecyclerView = findViewById(R.id.alarmsRecyclerView)
+
+        alarmsRecyclerView.layoutManager = LinearLayoutManager(this)
+        alarmsRecyclerView.adapter = AlarmAdapter(alarms)
+
+        updateTime()
+
+        setAlarmButton.setOnClickListener {
+            // Code to set a new alarm
+        }
+    }
+
+    private fun updateTime() {
+        val currentTime = Calendar.getInstance().time
+        val format = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        currentTimeTextView.text = format.format(currentTime)
+    }
+}
